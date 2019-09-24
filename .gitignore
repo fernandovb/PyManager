@@ -1,0 +1,9 @@
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.pytest_cache/*
+.pytest_cache/v/cache/*
+!.pytest_cache/v/cache/nodeids
+!.pytest_cache/v/cache/stepwise
