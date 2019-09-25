@@ -6,6 +6,13 @@ Projeto de estudo para desenvolvimento de sistema ERP com uso de Firebird, SqlAl
 
 Sem grandes pretenções, este projeto visa o estudo da criação e uso de um sistema de gestão e controle, com uso de ferramentas OpenSource, buscando o conhecimento nas ferramentas de desenvolvimento e técnicas utilizadas para obtenção desses controles.
 
+### Intenções do projeto
+
+Sou formado em Ciências Contábeis e, por muitos anos, vejo a carência de ferramentas que possam, de uma forma mais completa, passar as informações necessárias ao negócio. Em geral as ferramentas são fragmentadas, sendo adquirido ferramentas separadas para controles financeiros, contábeis, estoques e fiscais, o que gera custos adicionais e dificulta a consolidação das informações as parte interessadas.
+As ferramentas que oferecem soluções desta natureza, tem custos elevados, além de não integrarem uma solução realmente completa.
+Reforço que sem grandes pretenções, a principal intenção deste projeto é o aprendizado desta fantástica ferramenta, o Python, além de aprofundar os estudos sobre programação.
+Se, de alguma forma, este projeto puder ajudar, mesmo que de uma pequena maneira os usuários que o acessarem, já estarei além de minhas espectativas, já que sou uma criança neste universo gigantesco da programação.
+
 ### Módulos
 
 Os módulos pretendidos neste projeto serão:
@@ -19,13 +26,20 @@ Os módulos pretendidos neste projeto serão:
 - TAX (Management Taxes): conterá o módulo para gestão de tributos, que fornecerá informações sobre os impostos formas de tributação, legislação fiscal;
 - MRP (Material Requirement Planning): conterá o módulo para controle de produtos, estoque e movimentações de materiais, bem como controles e registros de inventários.
 
+Ainda haverá um móduto para a parte comercial, com controle de pedidos de compra e venda, mas que ainda não foi definido.
+
+### Requisitos
+
+Desenvolvido em Python 3.7 com uso dos módulos:
+
+- wxPython;
+- SqlAlchemy;
+
 ## Sobre o autor
 
-Sou formado em Ciências Contábeis e, por muitos anos, vejo a carência de ferramentas que possam, de uma forma mais completa, passar as informações necessárias ao negócio. Em geral as ferramentas são fragmentadas, sendo adquirido ferramentas separadas para controles financeiros, contábeis, estoques e fiscais, o que gera custos adicionais e dificulta a consolidação das informações as parte interessadas.
-As ferramentas que oferecem soluções desta natureza, tem custos elevados, além de não integrarem uma solução realmente completa.
-Como já dito, sou contabilista, um apaixonado por controles e com muito amor pela tecnologia. Além de gostar de resolver problemas, poder entregar a informação correta de forma tempestiva é o que me motivou a começar este, e outros projetos, a fim chegar a uma solução que atenda as necessidades do empresariado brasileiro.
+Me chamo Fernando Vicente Batista. Sou formado em Ciências Contábeis desde 2011, tendo uma curta experiência com desenvolvimento com COBOL nos anos 90. Depois de muito tempo sem me envolver com programação, voltei, em 2005 a ter contato com a programação, mas desta vez com Delphi, onde tive os primeiros contatos com POO. Embora tenha gostado da linguagem e aprendido os fundamentos e conceitos, somente em 2018 voltei a pegar com mais vontade os estudos, mas agora com Python.
 
 ## Desenvolvimento
 
-Devido a necessidade de estudo para obtenção de conhecimento, o projeto está sendo desenvolvido apenas por mim.
-Quem tiver sugestões para melhorar os códigos, poderá entrar em contato comigo através do e-mail fernandovicente.batista@hotmail.com.
+Devido a necessidade de estudo para obtenção de conhecimento com programação, principalmente em Python, o projeto está sendo desenvolvido apenas por mim.
+Quem tiver sugestões sobre melhorias dos códigos, indicação de literaturas, poderá entrar em contato comigo através do e-mail fernandovicente.batista@hotmail.com.

@@ -18,14 +18,18 @@ class SRUSR(TSRUSR):
         self.data_save()
     
     def on_cancel(self):
+        self.messenger(mensagem='Campos limpos, sem gravar dados.')
         self.tc_clear()
 
     def on_close(self):
+        self.messenger(mensagem='Transação encerrada!')
         pub.sendMessage('framePanel', message='close')
         self.Destroy()
+    
+    def messenger(self, mensagem=''):
+        pub.sendMessage('Messenger', message=mensagem)
 
     def on_kill_focus(self, event):
-        now = datetime.today()
         if self.tc_frequencia.Value != '':
             vigencia = datetime.today() + timedelta(days=float(self.tc_frequencia.Value))
             self.tc_vigencia.Value = vigencia.strftime('%d/%m/%Y')
@@ -43,14 +47,19 @@ class SRUSR(TSRUSR):
         pass
 
     def data_save(self):
-        font = CSRUSR(self.tc_matricula.Value, 
-                    self.cb_situacao.Value, 
-                    self.tc_nome.Value, 
-                    self.tc_setor.Value, 
-                    self.tc_funcao.Value, 
-                    self.tc_senha.Value)
-        self.data_list.append(font)
-        self.tc_clear()
+        try:
+            font = CSRUSR(self.tc_matricula.Value, 
+                          self.cb_situacao.Value, 
+                          self.tc_nome.Value, 
+                          self.tc_setor.Value, 
+                          self.tc_funcao.Value, 
+                          self.tc_senha.Value)
+            self.data_list.append(font)
+            self.tc_clear()
+        except TypeError:
+            self.messenger(mensagem='TypeError!!!')
+        except:
+            self.messenger(mensagem='Outro erro!')
     
     def tc_clear(self):
         self.tc_matricula.Value = ''

@@ -7,7 +7,6 @@ from wx.lib.pubsub import pub
 from _view.sys.telas.tmn01 import TMN01
 from _view.sys.sulog import SULOG
 from _view.sys.mn02 import MN02
-from _view.sys.teste import TESTE
 from _view.sys.srusr import SRUSR
 from _view.sys.srcfg import SRCFG
 
@@ -26,6 +25,7 @@ class MN01(TMN01):
         self.menu = MN02(self.sb_transaction)
         self.sb_transaction.ShowNewPage(self.menu)
         # Carrega tela de login
+        pub.subscribe(self.messenger, 'Messenger')
         pub.subscribe(self.my_listener, 'frameListener')
         dlg = SULOG()
         dlg.ShowModal()
@@ -96,3 +96,9 @@ class MN01(TMN01):
     def my_panel(self, message, arg2=None):
         if message == 'close':
             self.sb_transaction.SetSelection(0)
+        else:
+            self.StbMenu.SetStatusText(message)
+
+    def messenger(self, message, arg2=None):
+        self.StbMenu.SetStatusText(message)
+        self.mn_timer.Start(5000)
