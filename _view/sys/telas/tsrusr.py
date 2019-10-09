@@ -247,8 +247,8 @@ class TSRUSR ( wx.Panel ):
 		self.bt_find.SetBitmapDisabled( wx.Bitmap( u"desingner/icons/ac_buscar_16x16_inat.png", wx.BITMAP_TYPE_ANY ) )
 		bSizer7.Add( self.bt_find, 0, wx.ALL, 5 )
 
-		self.bt_redefinir = wx.Button( self, wx.ID_ANY, u"&Redefinir Senha", wx.DefaultPosition, wx.Size( -1,36 ), 0 )
-		bSizer7.Add( self.bt_redefinir, 0, wx.ALL, 5 )
+		self.bt_select = wx.Button( self, wx.ID_ANY, u"&Redefinir Senha", wx.DefaultPosition, wx.Size( -1,36 ), 0 )
+		bSizer7.Add( self.bt_select, 0, wx.ALL, 5 )
 
 
 		bSizer7.Add( ( 0, 0), 1, wx.EXPAND, 0 )
@@ -266,7 +266,7 @@ class TSRUSR ( wx.Panel ):
 		# Connect Events
 		self.tc_frequencia.Bind( wx.EVT_KILL_FOCUS, self.on_kill_focus )
 		self.bt_find.Bind( wx.EVT_BUTTON, self.ac_find )
-		self.bt_redefinir.Bind( wx.EVT_BUTTON, self.on_reset_pass )
+		self.bt_select.Bind( wx.EVT_BUTTON, self.on_reset_pass )
 
 	def __del__( self ):
 		pass

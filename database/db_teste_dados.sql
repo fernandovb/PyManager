@@ -1,20 +1,34 @@
 /* Conecta ao banco de dados criado */
 
-CONNECT 'C:\Users\ferna\Documents\Python Exemplos\Firebird\db_teste.fdb'  USER 'SYSDBA' PASSWORD 'masterkey';
+CONNECT 'E:\PyManager\database\contabil.fdb'  USER 'SYSDBA' PASSWORD 'masterkey';
 
-/* Insere dados nas tabelas de pessoas */
+/* Insere dados em Setores */
 
-INSERT INTO MRP$PESSOAS (nome_formal,nome_alternativo,end_logradouro,end_numero,end_bairro,end_municipio,end_estado,cad_federal,cad_estadual)
-VALUES ('FERNANDO VICENTE BATISTA','VICENTE','RUA 47','452','SANTA TEREZA','GOIANÉSIA','GO','61648019153', '13098798-00');
+INSERT INTO SYS$SRSTR (ID_SETOR, NOME_SETOR) 
+VALUES (1, 'ADMINISTRAÇÃO');
 
-INSERT INTO MRP$PESSOAS (nome_formal,nome_alternativo,end_logradouro,end_numero,end_bairro,end_municipio,end_estado)
-VALUES ('POLIANE CUNHA DE SOUZA BATISTA','POLIANE','RUA 47','452','SANTA TEREZA','GOIANÉSIA','GO');
+INSERT INTO SYS$SRSTR (id_setor, nome_setor)
+VALUES (2, 'TI');
 
-INSERT INTO MRP$TELEFONE_PESSOAS (id_pessoa,tipo,numero,contato)
-VALUES (1,'CEL','(65)9-9925-1782','VICENTE');
+INSERT INTO SYS$SRSTR (id_setor, nome_setor)
+VALUES (3, 'CONTABILIDADE');
 
-INSERT INTO MRP$TELEFONE_PESSOAS (id_pessoa,tipo,numero,contato)
-VALUES (2,'CEL','(65)9-9680-8875','POLIANE');
+/* Insere dados em Funções */
+
+INSERT INTO SYS$SRFNC (id_funcao, nome_funcao)
+VALUES (1, 'GERENTE');
+
+INSERT INTO SYS$SRFNC (id_funcao, nome_funcao)
+VALUES (2, 'ADMINISTRADOR BD');
+
+INSERT INTO SYS$SRFNC (id_funcao, nome_funcao)
+VALUES (3, 'CONTABILISTA');
+
+/* Insere dados de Usuários */
+
+INSERT INTO SYS$SRUSR (id_matricula, situacao, nome_usuario, id_setor, id_funcao, senha, redefinir, frequencia)
+VALUES ('FERNANDO', 0, 'FERNANDO VICENTE BATISTA', 3, 3, '123456', 0, 0);
+
 
 /* Grava dados */
 

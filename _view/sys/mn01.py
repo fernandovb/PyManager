@@ -9,6 +9,7 @@ from _view.sys.sulog import SULOG
 from _view.sys.mn02 import MN02
 from _view.sys.srusr import SRUSR
 from _view.sys.srcfg import SRCFG
+import _model.sys.global_conn as gconn
 
 
 class MN01(TMN01):
@@ -24,8 +25,11 @@ class MN01(TMN01):
         # Cria painel menu
         self.menu = MN02(self.sb_transaction)
         self.sb_transaction.ShowNewPage(self.menu)
-        # Carrega tela de login
+        self.list_transaction = ['SRUSR', 'SRCFG']
+        # Cria mensageiros
         pub.subscribe(self.messenger, 'Messenger')
+        pub.subscribe(self.transaction, 'Transações')
+        # Carrega tela de login
         pub.subscribe(self.my_listener, 'frameListener')
         dlg = SULOG()
         dlg.ShowModal()
@@ -82,7 +86,7 @@ class MN01(TMN01):
         self.ac_chama_transacao(transacao=self.tc_executar.Value)
 
     def on_ok(self, event):
-        self.panel.on_ok(event)
+        self.panel.on_ok()
 
     def on_cancel(self, event):
         self.panel.on_cancel()
@@ -91,6 +95,10 @@ class MN01(TMN01):
         self.StbMenu.SetStatusText('')
 
     def my_listener(self, message, arg2=None):
+        if not gconn.conn.user == None:
+            self.StbMenu.SetStatusText(f'Usuário: {gconn.conn.user}', 1)
+            self.StbMenu.SetStatusText(f'Empresa: {gconn.conn.db}', 2)
+            self.StbMenu.SetStatusText('Status da conexão: ON', 3)
         self.Show()
 
     def my_panel(self, message, arg2=None):
@@ -102,3 +110,7 @@ class MN01(TMN01):
     def messenger(self, message, arg2=None):
         self.StbMenu.SetStatusText(message)
         self.mn_timer.Start(5000)
+
+    def transaction(self, message, arg2=None):
+        if message in self.list_transaction:
+            self.ac_chama_transacao(transacao=message)

@@ -22,22 +22,37 @@ CREATE DATABASE 'E:\PyManager\database\contabil.fdb' USER 'SYSDBA' PASSWORD 'mas
 
 CONNECT 'E:\PyManager\database\contabil.fdb'  USER 'SYSDBA' PASSWORD 'masterkey';
 
-/* Cria domínio */
+/* Cria domínios */
 
-CREATE DOMAIN SEB$DON_TIPO_TELEFONE AS CHAR(3) DEFAULT 'COM' CHECK (VALUE IN ('COM', 'RES', 'CEL'));
-CREATE DOMAIN SEB$DON_SITUACAO AS SMALLINT DEFAULT 0 CHECK (VALUE IN (1,2,3,9));
+CREATE DOMAIN SYS$DON_TIPO_TELEFONE AS CHAR(3) DEFAULT 'COM' CHECK (VALUE IN ('COM', 'RES', 'CEL'));
+CREATE DOMAIN SYS$DON_SITUACAO AS SMALLINT DEFAULT 0 CHECK (VALUE IN (0,1,2,3,9));
+CREATE DOMAIN SYS$DON_BOOL AS SMALLINT DEFAULT 0 CHECK (VALUE IN (0,1));
 
-/* Cria tabelas do sistema para cadastro de acessos, codificações, parâmetros gerais etc. */
-
-CREATE TABLE SYS$SETORES (
-	id_setor SMALLINT,
+/* Tabela de Setores */
+CREATE TABLE SYS$SRSTR (
+	id_setor INTEGER,
 	nome_setor VARCHAR(30),
+	CONSTRAINT SYS$SRSTR PRIMARY KEY (id_setor)
 );
 
-CREATE TABLE SYS$USUARIOS (
-	id_usuario VARCHAR(32),
+/* Tabela de Funções */
+CREATE TABLE SYS$SRFNC (
+	id_funcao INTEGER,
+	nome_funcao VARCHAR(30),
+	CONSTRAINT SYS$SRFNC PRIMARY KEY (id_funcao)
+);
+
+/* Tabela de Usuários */
+CREATE TABLE SYS$SRUSR (
+	id_matricula VARCHAR(32),
+	situacao SYS$DON_SITUACAO,
 	nome_usuario VARCHAR(50),
-	funcao VARCHAR(30),
-	setor VARCHAR(30),
-	CONSTRAINT SYS$PK_USUARIO PRIMARY KEY (id_usuario)
+	id_setor INTEGER,
+	id_funcao INTEGER,
+	senha VARCHAR(30),
+	redefinir SYS$DON_BOOL,
+	frequencia INTEGER,
+	CONSTRAINT SYS$PK_SRUSR PRIMARY KEY (id_matricula),
+	CONSTRAINT SYS$FK_SRSTR_SRUSR FOREIGN KEY (id_setor) REFERENCES SYS$SRSTR,
+	CONSTRAINT SYS$FK_SRFNC_SRUSR FOREIGN KEY (id_funcao) REFERENCES SYS$SRFNC
 );

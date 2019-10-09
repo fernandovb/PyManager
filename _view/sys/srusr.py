@@ -38,10 +38,12 @@ class SRUSR(TSRUSR):
     def ac_find(self, event):
         if self.bt_find.Label == 'Localizar':
             self.sb_widgets.SetSelection(1)
-            self.bt_find.Label = 'Buscar'
+            self.bt_find.Label = 'Retornar'
+            self.bt_select.Show()
         else:
             self.sb_widgets.SetSelection(0)
             self.bt_find.Label = 'Localizar'
+            self.bt_select.Hide()
 
     def on_reset_pass(self, event):
         pass
@@ -49,12 +51,15 @@ class SRUSR(TSRUSR):
     def data_save(self):
         try:
             font = CSRUSR(self.tc_matricula.Value, 
-                          self.cb_situacao.Value, 
-                          self.tc_nome.Value, 
-                          self.tc_setor.Value, 
-                          self.tc_funcao.Value, 
-                          self.tc_senha.Value)
+                          self.cb_situacao.Select, 
+                          self.tc_nome.Value,
+                          self.tc_setor.Value,
+                          self.tc_funcao.Value,
+                          self.tc_senha.Value,
+                          self.cb_redefinir.Value,
+                          self.tc_frequencia.Value)
             self.data_list.append(font)
+            self.messenger(mensagem='Dados gravados.')
             self.tc_clear()
         except TypeError:
             self.messenger(mensagem='TypeError!!!')

@@ -27,10 +27,18 @@ class TMN02 ( wx.Panel ):
 		lay_modulos = wx.BoxSizer( wx.VERTICAL )
 
 		self.m_listbook2 = wx.Listbook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LB_DEFAULT )
-		m_listbook2ImageSize = wx.Size( 64,64 )
+		m_listbook2ImageSize = wx.Size( 32,32 )
 		m_listbook2Index = 0
 		m_listbook2Images = wx.ImageList( m_listbook2ImageSize.GetWidth(), m_listbook2ImageSize.GetHeight() )
 		self.m_listbook2.AssignImageList( m_listbook2Images )
+		self.m_panel1 = wx.Panel( self.m_listbook2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_listbook2.AddPage( self.m_panel1, u"Sistema (SYS)", False )
+		m_listbook2Bitmap = wx.Bitmap( u"desingner/icons/ac_adicionar_32x32.png", wx.BITMAP_TYPE_ANY )
+		if ( m_listbook2Bitmap.IsOk() ):
+			m_listbook2Images.Add( m_listbook2Bitmap )
+			self.m_listbook2.SetPageImage( m_listbook2Index, m_listbook2Index )
+			m_listbook2Index += 1
+
 
 		lay_modulos.Add( self.m_listbook2, 1, wx.EXPAND |wx.ALL, 5 )
 

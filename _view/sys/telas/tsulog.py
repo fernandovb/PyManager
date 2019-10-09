@@ -32,7 +32,7 @@ class TSULOG ( wx.Dialog ):
 
 		lay_dados.Add( self.LbHost, 0, wx.ALL, 5 )
 
-		self.tc_host = wx.TextCtrl( self, wx.ID_ANY, u"localhost", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.tc_host = wx.TextCtrl( self, wx.ID_ANY, u"127.0.0.1", wx.DefaultPosition, wx.DefaultSize, 0 )
 		lay_dados.Add( self.tc_host, 0, wx.ALL, 5 )
 
 		self.LbUser = wx.StaticText( self, wx.ID_ANY, u"Usuário", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -56,7 +56,7 @@ class TSULOG ( wx.Dialog ):
 
 		lay_dados.Add( self.LbDatabase, 0, wx.ALL, 5 )
 
-		self.tc_database = wx.TextCtrl( self, wx.ID_ANY, u"fvb_db", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.tc_database = wx.TextCtrl( self, wx.ID_ANY, u"contabil.db", wx.DefaultPosition, wx.DefaultSize, 0 )
 		lay_dados.Add( self.tc_database, 0, wx.ALL, 5 )
 
 		self.lb_empresa = wx.StaticText( self, wx.ID_ANY, u"Empresa", wx.DefaultPosition, wx.DefaultSize, 0 )
