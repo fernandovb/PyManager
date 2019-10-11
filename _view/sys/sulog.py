@@ -20,7 +20,7 @@ class SULOG(TSULOG):
             login = CSULOG(user=self.tc_user.Value, pw=self.tc_senha.Value)
             login.on_connection()
             if login.status:
-                pub.sendMessage('frameListener', message='show')
+                pub.sendMessage('frameListener', message='show', name_user=login.name_user)
                 self.Destroy()
             else:
                 self.tb_mensagem.Value = self.tb_mensagem.Value + '\n' + hora.strftime('%H:%M:%S: ') + login.mensagem

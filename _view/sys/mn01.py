@@ -94,9 +94,9 @@ class MN01(TMN01):
     def on_timer(self, event):
         self.StbMenu.SetStatusText('')
 
-    def my_listener(self, message, arg2=None):
+    def my_listener(self, message, name_user, arg2=None):
         if not gconn.conn.user == None:
-            self.StbMenu.SetStatusText(f'Usuário: {gconn.conn.user}', 1)
+            self.StbMenu.SetStatusText(f'Usuário: {name_user}', 1)
             self.StbMenu.SetStatusText(f'Empresa: {gconn.conn.db}', 2)
             self.StbMenu.SetStatusText('Status da conexão: ON', 3)
         self.Show()
