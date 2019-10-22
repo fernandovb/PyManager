@@ -16,11 +16,13 @@
 	MRP$ : (M) tabelas para uso de controle de produtos e estoques;
  */
 
-CREATE DATABASE 'E:\PyManager\database\contabil.fdb' USER 'SYSDBA' PASSWORD 'masterkey';
+CREATE DATABASE 'E:\PyManager\database\contabil.fdb' USER 'FERNANDO' PASSWORD 'Cronos@8.pjm'
+	DEFAULT CHARACTER SET ISO8859_1 COLLATION PT_BR;
 
 /* Conecta ao banco de dados criado */
 
 CONNECT 'E:\PyManager\database\contabil.fdb'  USER 'SYSDBA' PASSWORD 'masterkey';
+SET NAMES ISO8859_1;
 
 /* Cria domínios */
 

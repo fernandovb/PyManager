@@ -22,17 +22,18 @@ class MN01(TMN01):
         self.StbMenu.SetStatusText(f'Usuário:', 1)
         self.StbMenu.SetStatusText(f'Empresa: ', 2)
         self.StbMenu.SetStatusText(f'Status da conexão: OFF', 3)
-        # Cria painel menu
-        self.menu = MN02(self.sb_transaction)
-        self.sb_transaction.ShowNewPage(self.menu)
-        self.list_transaction = ['SRUSR', 'SRCFG']
         # Cria mensageiros
         pub.subscribe(self.messenger, 'Messenger')
         pub.subscribe(self.transaction, 'Transações')
+        pub.subscribe(self.botton_off, 'botton_off')
         # Carrega tela de login
         pub.subscribe(self.my_listener, 'frameListener')
         dlg = SULOG()
         dlg.ShowModal()
+        # Cria painel menu
+        self.menu = MN02(self.sb_transaction)
+        self.sb_transaction.ShowNewPage(self.menu)
+        self.list_transaction = ['SRUSR', 'SRCFG']
 
     def ac_chama_transacao(self, transacao=''):
         # t = '_view.sys.' + transacao.lower() + '.' + transacao.upper()
@@ -64,7 +65,7 @@ class MN01(TMN01):
             try:
                 self.sb_transaction.SetSelection(0)
                 self.sb_transaction.RemovePage(1)
-                self.panel.Destroy()
+                self.panel.on_close()
             except:
                 pass
         else:
@@ -72,7 +73,8 @@ class MN01(TMN01):
             result = dlg.ShowModal()
             dlg.Destroy()
             if result == wx.ID_YES:
-                exit()
+                gconn.conn.close_connection()
+                wx.Exit()
     
     def on_keydown(self, event):
         keycode = event.GetKeyCode()
@@ -90,9 +92,27 @@ class MN01(TMN01):
 
     def on_cancel(self, event):
         self.panel.on_cancel()
+    
+    def on_find(self, event):
+        self.panel.on_find()
 
     def on_timer(self, event):
         self.StbMenu.SetStatusText('')
+    
+    def on_insert(self, event):
+        self.panel.on_insert()
+
+    def on_edit(self, event):
+        self.panel.on_edit()
+
+    def on_delete(self, event):
+        pass
+
+    def on_print(self, event):
+        pass
+
+    def on_pdf(self, event):
+        pass
 
     def my_listener(self, message, name_user, arg2=None):
         if not gconn.conn.user == None:
@@ -114,3 +134,41 @@ class MN01(TMN01):
     def transaction(self, message, arg2=None):
         if message in self.list_transaction:
             self.ac_chama_transacao(transacao=message)
+        
+    def botton_off(self, message, arg2=None):
+        if message == 0:
+            # Desabilita botões - Menu em Exibição
+            self.tb_mn01.EnableTool(wx.ID_SAVE, False)
+            self.tb_mn01.EnableTool(wx.ID_CANCEL, False)
+            self.tb_mn01.EnableTool(wx.ID_FIND, False)
+            self.tb_mn01.EnableTool(wx.ID_ADD, False)
+            self.tb_mn01.EnableTool(wx.ID_EDIT, False)
+            self.tb_mn01.EnableTool(wx.ID_DELETE, False)
+            self.tb_mn01.EnableTool(wx.ID_PRINT, False)
+        elif message == 1:
+            # Habilita botões - Tela sem dados
+            self.tb_mn01.EnableTool(wx.ID_SAVE, False)
+            self.tb_mn01.EnableTool(wx.ID_CANCEL, False)
+            self.tb_mn01.EnableTool(wx.ID_FIND, True)
+            self.tb_mn01.EnableTool(wx.ID_ADD, True)
+            self.tb_mn01.EnableTool(wx.ID_EDIT, False)
+            self.tb_mn01.EnableTool(wx.ID_DELETE, False)
+            self.tb_mn01.EnableTool(wx.ID_PRINT, False)
+        elif message == 2:
+            # Habilita botões - Tela com dados sem edição
+            self.tb_mn01.EnableTool(wx.ID_SAVE, False)
+            self.tb_mn01.EnableTool(wx.ID_CANCEL, False)
+            self.tb_mn01.EnableTool(wx.ID_FIND, True)
+            self.tb_mn01.EnableTool(wx.ID_ADD, True)
+            self.tb_mn01.EnableTool(wx.ID_EDIT, True)
+            self.tb_mn01.EnableTool(wx.ID_DELETE, True)
+            self.tb_mn01.EnableTool(wx.ID_PRINT, False)
+        elif message == 3:
+            # Habilita botões - Tela com dados em edição
+            self.tb_mn01.EnableTool(wx.ID_SAVE, True)
+            self.tb_mn01.EnableTool(wx.ID_CANCEL, True)
+            self.tb_mn01.EnableTool(wx.ID_FIND, False)
+            self.tb_mn01.EnableTool(wx.ID_ADD, False)
+            self.tb_mn01.EnableTool(wx.ID_EDIT, False)
+            self.tb_mn01.EnableTool(wx.ID_DELETE, False)
+            self.tb_mn01.EnableTool(wx.ID_PRINT, False)

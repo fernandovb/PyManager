@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from wx.lib.pubsub import pub
+from wx import Exit
 from _view.sys.telas.tsulog import TSULOG
 from _control.sys.csulog import CSULOG
 
@@ -12,7 +13,7 @@ class SULOG(TSULOG):
         super(SULOG, self).__init__(None, *args, *kwargs)
 
     def on_cancelar(self, event):
-        exit()
+        Exit()
 
     def on_login(self, event):
         hora = datetime.today()

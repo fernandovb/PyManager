@@ -149,8 +149,26 @@ class TSRUSR ( wx.Panel ):
 
 		lay_text_1.Add( bSizer14, 0, wx.EXPAND, 5 )
 
-		self.tc_funcao = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 150,25 ), 0 )
-		lay_text_1.Add( self.tc_funcao, 0, wx.ALL, 2 )
+		bSizer15 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.tc_funcao = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 35,25 ), 0 )
+		bSizer15.Add( self.tc_funcao, 0, wx.ALL, 2 )
+
+		self.bt_fd_funcao = wx.Button( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 25,25 ), 0 )
+
+		self.bt_fd_funcao.SetBitmap( wx.Bitmap( u"desingner/icons/ac_buscar_16x16.png", wx.BITMAP_TYPE_ANY ) )
+		self.bt_fd_funcao.SetBitmapDisabled( wx.Bitmap( u"desingner/icons/ac_buscar_16x16_inat.png", wx.BITMAP_TYPE_ANY ) )
+		bSizer15.Add( self.bt_fd_funcao, 0, wx.ALL, 2 )
+
+		self.lb_nome_funcao = wx.StaticText( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 330,25 ), 0|wx.BORDER_SIMPLE )
+		self.lb_nome_funcao.Wrap( -1 )
+
+		self.lb_nome_funcao.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_HIGHLIGHTTEXT ) )
+
+		bSizer15.Add( self.lb_nome_funcao, 0, wx.ALL, 2 )
+
+
+		lay_text_1.Add( bSizer15, 0, wx.EXPAND, 5 )
 
 		lay_senha = wx.BoxSizer( wx.HORIZONTAL )
 
@@ -200,31 +218,35 @@ class TSRUSR ( wx.Panel ):
 		self.pn_data_list = wx.Panel( self.sb_widgets, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.BORDER_SIMPLE )
 		lay_grid_list = wx.BoxSizer( wx.VERTICAL )
 
-		self.m_grid1 = wx.grid.Grid( self.pn_data_list, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.mg_search = wx.grid.Grid( self.pn_data_list, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
 
 		# Grid
-		self.m_grid1.CreateGrid( 5, 5 )
-		self.m_grid1.EnableEditing( True )
-		self.m_grid1.EnableGridLines( True )
-		self.m_grid1.EnableDragGridSize( False )
-		self.m_grid1.SetMargins( 0, 0 )
+		self.mg_search.CreateGrid( 1, 2 )
+		self.mg_search.EnableEditing( True )
+		self.mg_search.EnableGridLines( True )
+		self.mg_search.EnableDragGridSize( False )
+		self.mg_search.SetMargins( 0, 0 )
 
 		# Columns
-		self.m_grid1.EnableDragColMove( False )
-		self.m_grid1.EnableDragColSize( True )
-		self.m_grid1.SetColLabelSize( 30 )
-		self.m_grid1.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+		self.mg_search.SetColSize( 0, 100 )
+		self.mg_search.SetColSize( 1, 400 )
+		self.mg_search.EnableDragColMove( False )
+		self.mg_search.EnableDragColSize( True )
+		self.mg_search.SetColLabelSize( 30 )
+		self.mg_search.SetColLabelValue( 0, u"Matrícula" )
+		self.mg_search.SetColLabelValue( 1, u"Nome Usuário" )
+		self.mg_search.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
 
 		# Rows
-		self.m_grid1.EnableDragRowSize( True )
-		self.m_grid1.SetRowLabelSize( 30 )
-		self.m_grid1.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+		self.mg_search.EnableDragRowSize( True )
+		self.mg_search.SetRowLabelSize( 30 )
+		self.mg_search.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
 
 		# Label Appearance
 
 		# Cell Defaults
-		self.m_grid1.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
-		lay_grid_list.Add( self.m_grid1, 1, wx.EXPAND, 5 )
+		self.mg_search.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
+		lay_grid_list.Add( self.mg_search, 1, wx.EXPAND, 5 )
 
 
 		self.pn_data_list.SetSizer( lay_grid_list )
@@ -241,11 +263,11 @@ class TSRUSR ( wx.Panel ):
 
 		bSizer7 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.bt_find = wx.Button( self, wx.ID_ANY, u"Localizar", wx.DefaultPosition, wx.Size( 100,36 ), 0 )
+		self.bt_search = wx.Button( self, wx.ID_ANY, u"Localizar", wx.DefaultPosition, wx.Size( 100,36 ), 0 )
 
-		self.bt_find.SetBitmap( wx.Bitmap( u"desingner/icons/ac_buscar_16x16.png", wx.BITMAP_TYPE_ANY ) )
-		self.bt_find.SetBitmapDisabled( wx.Bitmap( u"desingner/icons/ac_buscar_16x16_inat.png", wx.BITMAP_TYPE_ANY ) )
-		bSizer7.Add( self.bt_find, 0, wx.ALL, 5 )
+		self.bt_search.SetBitmap( wx.Bitmap( u"desingner/icons/ac_buscar_16x16.png", wx.BITMAP_TYPE_ANY ) )
+		self.bt_search.SetBitmapDisabled( wx.Bitmap( u"desingner/icons/ac_buscar_16x16_inat.png", wx.BITMAP_TYPE_ANY ) )
+		bSizer7.Add( self.bt_search, 0, wx.ALL, 5 )
 
 		self.bt_select = wx.Button( self, wx.ID_ANY, u"&Redefinir Senha", wx.DefaultPosition, wx.Size( -1,36 ), 0 )
 		bSizer7.Add( self.bt_select, 0, wx.ALL, 5 )
@@ -265,7 +287,8 @@ class TSRUSR ( wx.Panel ):
 
 		# Connect Events
 		self.tc_frequencia.Bind( wx.EVT_KILL_FOCUS, self.on_kill_focus )
-		self.bt_find.Bind( wx.EVT_BUTTON, self.ac_find )
+		self.mg_search.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.on_grid_dclick )
+		self.bt_search.Bind( wx.EVT_BUTTON, self.ac_search )
 		self.bt_select.Bind( wx.EVT_BUTTON, self.on_reset_pass )
 
 	def __del__( self ):
@@ -276,7 +299,10 @@ class TSRUSR ( wx.Panel ):
 	def on_kill_focus( self, event ):
 		event.Skip()
 
-	def ac_find( self, event ):
+	def on_grid_dclick( self, event ):
+		event.Skip()
+
+	def ac_search( self, event ):
 		event.Skip()
 
 	def on_reset_pass( self, event ):

@@ -64,10 +64,10 @@
                 <property name="font"></property>
                 <property name="hidden">0</property>
                 <property name="id">wxID_ANY</property>
-                <property name="label">MyMenuBar</property>
+                <property name="label">Menu Principal</property>
                 <property name="maximum_size"></property>
                 <property name="minimum_size"></property>
-                <property name="name">m_menubar1</property>
+                <property name="name">mn_mn01</property>
                 <property name="permission">protected</property>
                 <property name="pos"></property>
                 <property name="size"></property>
@@ -111,7 +111,7 @@
                     </object>
                 </object>
             </object>
-            <object class="wxToolBar" expanded="0">
+            <object class="wxToolBar" expanded="1">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -148,7 +148,7 @@
                 <property name="minimize_button">0</property>
                 <property name="minimum_size"></property>
                 <property name="moveable">1</property>
-                <property name="name">m_toolBar1</property>
+                <property name="name">tb_mn01</property>
                 <property name="packing">1</property>
                 <property name="pane_border">1</property>
                 <property name="pane_position"></property>
@@ -286,7 +286,7 @@
                 <object class="tool" expanded="0">
                     <property name="bitmap">Load From Embedded File; icons/ac_executar_16x16.png</property>
                     <property name="context_menu">0</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="id">wxID_EXECUTE</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Executar</property>
                     <property name="name">mt_run</property>
@@ -301,7 +301,7 @@
                 <object class="tool" expanded="0">
                     <property name="bitmap">Load From Embedded File; icons/ac_confirmar_16x16.png</property>
                     <property name="context_menu">0</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="id">wxID_SAVE</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">OK</property>
                     <property name="name">mt_ok</property>
@@ -313,7 +313,7 @@
                 <object class="tool" expanded="0">
                     <property name="bitmap">Load From Embedded File; icons/ac_cancelar_16x16.png</property>
                     <property name="context_menu">0</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="id">wxID_CANCEL</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Fechar</property>
                     <property name="name">mt_cancel</property>
@@ -322,10 +322,91 @@
                     <property name="tooltip"></property>
                     <event name="OnToolClicked">on_cancel</event>
                 </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_buscar_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_FIND</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Localizar</property>
+                    <property name="name">mt_find</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Localiza registro.</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_find</event>
+                </object>
+                <object class="toolSeparator" expanded="1">
+                    <property name="permission">protected</property>
+                </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_adicionar_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_ADD</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Novo registro</property>
+                    <property name="name">mt_insert</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Cria novo registro</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_insert</event>
+                </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_editar_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_EDIT</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Altera registro</property>
+                    <property name="name">mt_edit</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Altera registro atual</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_edit</event>
+                </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_lixeira_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_DELETE</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Inativa registro</property>
+                    <property name="name">mt_delete</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Inativa o registro atual</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_delete</event>
+                </object>
+                <object class="toolSeparator" expanded="1">
+                    <property name="permission">protected</property>
+                </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_imprimir_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_PRINT</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Envia tela para impressora</property>
+                    <property name="name">mt_print</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Envia dados da tela para impressora</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_print</event>
+                </object>
+                <object class="tool" expanded="1">
+                    <property name="bitmap">Load From Embedded File; icons\ac_pdf_16x16.png</property>
+                    <property name="context_menu">0</property>
+                    <property name="id">wxID_PRINT</property>
+                    <property name="kind">wxITEM_NORMAL</property>
+                    <property name="label">Envia tela para impressora</property>
+                    <property name="name">mt_pdf</property>
+                    <property name="permission">protected</property>
+                    <property name="statusbar">Gera arquivo PDF com dados da tela</property>
+                    <property name="tooltip"></property>
+                    <event name="OnToolClicked">on_pdf</event>
+                </object>
+                <object class="toolSeparator" expanded="0">
+                    <property name="permission">protected</property>
+                </object>
                 <object class="tool" expanded="0">
                     <property name="bitmap">Load From Embedded File; icons/ac_sair_16x16.png</property>
                     <property name="context_menu">0</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="id">wxID_EXIT</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Sair</property>
                     <property name="name">mt_exit</property>
@@ -333,9 +414,6 @@
                     <property name="statusbar">Encerra seção em andamento.</property>
                     <property name="tooltip"></property>
                     <event name="OnToolClicked">on_exit</event>
-                </object>
-                <object class="toolSeparator" expanded="0">
-                    <property name="permission">protected</property>
                 </object>
             </object>
             <object class="wxBoxSizer" expanded="1">

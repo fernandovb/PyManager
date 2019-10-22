@@ -17,6 +17,7 @@ class MN02(TMN02):
 			self.gSizer1.Add(self.btn, 0, wx.ALL|wx.EXPAND, 5)
 		self.m_panel1.SetSizer(self.gSizer1)
 		self.m_panel1.Layout()
+		pub.sendMessage('botton_off', message=0)
 
 	def OnButton(self, Event, button_label):
 		pub.sendMessage('Transações', message=button_label)

@@ -6,7 +6,7 @@ from _model.sys.msrusr import MSRUSR
 
 class CSULOG:
 
-    def __init__(self, user='sysdba', pw='masterkey', host='127.0.0.1', db='E:/PyManager/database/CONTABIL.fdb'):
+    def __init__(self, user='SYSDBA', pw='masterkey', host='127.0.0.1', db='E:/PyManager/database/CONTABIL.fdb'):
         self.user = user.upper()
         self.pw = pw
         self.host = host
@@ -15,7 +15,7 @@ class CSULOG:
     
     def on_connection(self):
         login = MSULOG(user=self.user, pw=self.pw)
-        usuario = MSRUSR()
+        usuario = MSRUSR(id_matricula=self.user)
         data_user = usuario.find_user(user=self.user)
         self.name_user = data_user.nome_usuario
         self.status = login.connected[0]

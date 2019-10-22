@@ -14,9 +14,12 @@ class Connection(object):
         self.host = host
         self.db = db
         try:
-            self.engine = create_engine(f'firebird+fdb://{self.user}:{self.pw}@{self.host}/{self.db}', pool_size=10, max_overflow=20)
-            self.Session = sessionmaker(bind=self.engine)
-            self.engine.connect()
+            engine = create_engine(f'firebird+fdb://{self.user}:{self.pw}@{self.host}/{self.db}', 
+                                        pool_size=10, 
+                                        max_overflow=20, 
+                                        convert_unicode=True)
+            self.Session = sessionmaker(bind=engine)
+            self.connection = engine.connect()
             mensagem = f'Conectado em "{self.host}:{self.db}"'
             status = True
         except exc.DatabaseError as error:
@@ -27,7 +30,6 @@ class Connection(object):
             status = False
         finally:
             return [status, mensagem]
-
-# c = Connection()
-# t = c.__engine__(user='FERNANDO', pw='Cronos@8.pjm', host='127.0.0.1', db='E:/PyManager/database/contabil.fdb')
-# print(t[1])
+    
+    def close_connection(self):
+        self.connection.close()
