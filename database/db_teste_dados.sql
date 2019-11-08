@@ -1,6 +1,6 @@
 /* Conecta ao banco de dados criado */
 
-CONNECT 'E:\PyManager\database\contabil.fdb'  USER 'SYSDBA' PASSWORD 'masterkey';
+CONNECT 'E:\PyManager\database\contabil.fdb'  USER 'FERNANDO' PASSWORD '123456';
 SET NAMES ISO8859_1;
 
 /* Insere dados em Setores */

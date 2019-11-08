@@ -286,6 +286,8 @@ class TSRUSR ( wx.Panel ):
 		self.Layout()
 
 		# Connect Events
+		self.bt_fd_setor.Bind( wx.EVT_BUTTON, self.ac_find_setor )
+		self.bt_fd_funcao.Bind( wx.EVT_BUTTON, self.ac_find_funcao )
 		self.tc_frequencia.Bind( wx.EVT_KILL_FOCUS, self.on_kill_focus )
 		self.mg_search.Bind( wx.grid.EVT_GRID_CELL_LEFT_DCLICK, self.on_grid_dclick )
 		self.bt_search.Bind( wx.EVT_BUTTON, self.ac_search )
@@ -296,6 +298,12 @@ class TSRUSR ( wx.Panel ):
 
 
 	# Virtual event handlers, overide them in your derived class
+	def ac_find_setor( self, event ):
+		event.Skip()
+
+	def ac_find_funcao( self, event ):
+		event.Skip()
+
 	def on_kill_focus( self, event ):
 		event.Skip()
 

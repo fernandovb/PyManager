@@ -12,13 +12,13 @@ import wx.xrc
 import wx.grid
 
 ###########################################################################
-## Class TEFOPR
+## Class TSLFNC
 ###########################################################################
 
-class TEFOPR ( wx.Dialog ):
+class TSLFNC ( wx.Dialog ):
 
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Consulta operação", pos = wx.DefaultPosition, size = wx.Size( 480,400 ), style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Consulta função", pos = wx.DefaultPosition, size = wx.Size( 480,400 ), style = wx.DEFAULT_DIALOG_STYLE )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 

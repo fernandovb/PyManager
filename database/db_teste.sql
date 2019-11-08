@@ -16,7 +16,7 @@
 	MRP$ : (M) tabelas para uso de controle de produtos e estoques;
  */
 
-CREATE DATABASE 'E:\PyManager\database\contabil.fdb' USER 'FERNANDO' PASSWORD 'Cronos@8.pjm'
+CREATE DATABASE 'E:\PyManager\database\contabil.fdb' USER 'FERNANDO' PASSWORD '123456'
 	DEFAULT CHARACTER SET ISO8859_1 COLLATION PT_BR;
 
 /* Conecta ao banco de dados criado */
@@ -57,4 +57,58 @@ CREATE TABLE SYS$SRUSR (
 	CONSTRAINT SYS$PK_SRUSR PRIMARY KEY (id_matricula),
 	CONSTRAINT SYS$FK_SRSTR_SRUSR FOREIGN KEY (id_setor) REFERENCES SYS$SRSTR,
 	CONSTRAINT SYS$FK_SRFNC_SRUSR FOREIGN KEY (id_funcao) REFERENCES SYS$SRFNC
+);
+
+/* Estrutura do NCM/SH - Nomenclatura Comum do Mercosul / Sistema Harmonizado
+	11 22 33 4 5
+	1 = Capítulo 2 primeiros dígitos do SH
+	2 = Posição 4 primeiros dígitos do SH
+	3 = Subposição 6 primeiros dígitos do SH
+	4 = Item 7 dígito do NCM
+	5 = Subitem 8 dígito do NCM*/
+
+/* Tabela de Capítulos NCM/SH */
+CREATE TABLE SEB$ERNCMCP (
+	id_capitulo CHAR(2),
+	descricao VARCHAR(300),
+	CONSTRAINT SEB$PK_ERNCMCP PRIMARY KEY (id_capitulo)
+);
+
+/* Tabela de NCM/SH*/
+CREATE TABLE SEB$ERNCM (
+	id_ncm CHAR(8),
+	id_capitulo INTEGER,
+	descricao VARCHAR(500) NOT NULL,
+	vigencia_ini DATE NOT NULL,
+	vigencia_fim DATE,
+	id_umd INTEGER,
+	CONSTRAINT SEB$PK_ERNCM PRIMARY KEY (id_ncm),
+	CONSTRAINT SEB$FK_ERNCM_ERNCMCP FOREIGN KEY (id_capitulo),
+	CONSTRAINT SEB$FK_ERNCM_ERUMD FOREIGN KEY (id_umd)
+);
+
+/* Tabela de unidades de medida (UMD) */
+CREATE TABLE SEB$ERUMD (
+	id_umd INTEGER,
+	descricao VARCHAR(100),
+	abr_umd CHAR(5),
+	CONSTRAINT SEB$PK_ERUMD PRIMARY KEY (id_umd),
+	CONSTRAINT SEB$UK_ERUMD UNIQUE (abr_umd)
+);
+
+/* Tabela de CEST - Código Estruturado da Substituição Tributária */
+
+CREATE TABLE SEB$ERCEST (
+	id_cest CHAR(7),
+	descricao VARCHAR(650),
+	vigencia_ini DATE NOT NULL,
+	vigencia_fim DATE,
+	CONSTRAINT SEB$PK_ERCEST PRIMARY KEY (id_cest)
+);
+
+/* Tabela de relação NCM e CEST */
+
+CREATE TABLE SEB$ERCTNC (
+	id_cest CHAR(7),
+	id_ncm CHAR(8)
 );

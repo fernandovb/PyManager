@@ -59,19 +59,20 @@ class TSRCFG ( wx.Panel ):
 
 		lay_label_1 = wx.BoxSizer( wx.VERTICAL )
 
-		self.lb_fundo = wx.StaticText( self.pn_data_fields, wx.ID_ANY, u"Cor do Fundo:", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.lb_fundo = wx.StaticText( self.pn_data_fields, wx.ID_ANY, u"Cor do Fundo:", wx.DefaultPosition, wx.Size( 100,25 ), wx.ALIGN_RIGHT )
 		self.lb_fundo.Wrap( -1 )
-
-		self.lb_fundo.SetMinSize( wx.Size( 100,25 ) )
 
 		lay_label_1.Add( self.lb_fundo, 0, wx.ALL, 2 )
 
-		self.lb_fundo1 = wx.StaticText( self.pn_data_fields, wx.ID_ANY, u"Cor do Botão:", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.lb_fundo1 = wx.StaticText( self.pn_data_fields, wx.ID_ANY, u"Cor da Frente:", wx.DefaultPosition, wx.Size( 100,25 ), wx.ALIGN_RIGHT )
 		self.lb_fundo1.Wrap( -1 )
 
-		self.lb_fundo1.SetMinSize( wx.Size( 100,25 ) )
+		lay_label_1.Add( self.lb_fundo1, 0, wx.ALL, 2 )
 
-		lay_label_1.Add( self.lb_fundo1, 0, wx.ALL, 5 )
+		self.lb_mode_theme = wx.StaticText( self.pn_data_fields, wx.ID_ANY, u"Tema:", wx.DefaultPosition, wx.Size( 100,25 ), wx.ALIGN_RIGHT )
+		self.lb_mode_theme.Wrap( -1 )
+
+		lay_label_1.Add( self.lb_mode_theme, 0, wx.ALL, 2 )
 
 
 		lay_dispenser.Add( lay_label_1, 0, wx.EXPAND, 5 )
@@ -80,25 +81,35 @@ class TSRCFG ( wx.Panel ):
 
 		lay_cor_fundo = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.cp_background = wx.ColourPickerCtrl( self.pn_data_fields, wx.ID_ANY, wx.SystemSettings.GetColour( wx.SYS_COLOUR_HIGHLIGHT ), wx.DefaultPosition, wx.Size( 100,25 ), wx.CLRP_DEFAULT_STYLE )
+		self.cp_background = wx.ColourPickerCtrl( self.pn_data_fields, wx.ID_ANY, wx.Colour( 48, 48, 48 ), wx.DefaultPosition, wx.Size( 100,25 ), wx.CLRP_DEFAULT_STYLE )
 		lay_cor_fundo.Add( self.cp_background, 0, wx.ALL, 2 )
 
-		self.tc_color_name = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,25 ), 0 )
-		lay_cor_fundo.Add( self.tc_color_name, 0, wx.ALL, 2 )
+		self.tc_color_background = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,25 ), 0 )
+		lay_cor_fundo.Add( self.tc_color_background, 0, wx.ALL, 2 )
 
 
 		lay_text_1.Add( lay_cor_fundo, 0, wx.EXPAND, 0 )
 
 		lay_cor_botao = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.cp_button = wx.ColourPickerCtrl( self.pn_data_fields, wx.ID_ANY, wx.SystemSettings.GetColour( wx.SYS_COLOUR_HIGHLIGHT ), wx.DefaultPosition, wx.Size( 100,25 ), wx.CLRP_DEFAULT_STYLE )
-		lay_cor_botao.Add( self.cp_button, 0, wx.ALL, 2 )
+		self.cp_foreground = wx.ColourPickerCtrl( self.pn_data_fields, wx.ID_ANY, wx.Colour( 255, 255, 255 ), wx.DefaultPosition, wx.Size( 100,25 ), wx.CLRP_DEFAULT_STYLE )
+		lay_cor_botao.Add( self.cp_foreground, 0, wx.ALL, 2 )
 
-		self.tc_color_name_button = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,25 ), 0 )
-		lay_cor_botao.Add( self.tc_color_name_button, 0, wx.ALL, 2 )
+		self.tc_color_foreground = wx.TextCtrl( self.pn_data_fields, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,25 ), 0 )
+		lay_cor_botao.Add( self.tc_color_foreground, 0, wx.ALL, 2 )
 
 
-		lay_text_1.Add( lay_cor_botao, 1, wx.EXPAND, 5 )
+		lay_text_1.Add( lay_cor_botao, 0, wx.EXPAND, 5 )
+
+		lay_dark_mode = wx.BoxSizer( wx.HORIZONTAL )
+
+		cb_mode_themeChoices = [ u"Dark", u"Light", u"Night Theme", u"Shades of Gray" ]
+		self.cb_mode_theme = wx.ComboBox( self.pn_data_fields, wx.ID_ANY, u"Dark", wx.DefaultPosition, wx.Size( 150,25 ), cb_mode_themeChoices, 0 )
+		self.cb_mode_theme.SetSelection( 0 )
+		lay_dark_mode.Add( self.cb_mode_theme, 0, wx.ALL, 2 )
+
+
+		lay_text_1.Add( lay_dark_mode, 0, wx.EXPAND, 2 )
 
 
 		lay_dispenser.Add( lay_text_1, 0, wx.EXPAND, 1 )
@@ -135,8 +146,11 @@ class TSRCFG ( wx.Panel ):
 		self.Layout()
 
 		# Connect Events
+		self.cp_background.Bind( wx.EVT_COLOURPICKER_CHANGED, self.on_colour_background )
 		self.cp_background.Bind( wx.EVT_KILL_FOCUS, self.on_cp_background_killfocus )
-		self.cp_button.Bind( wx.EVT_KILL_FOCUS, self.on_cp_background_killfocus )
+		self.cp_foreground.Bind( wx.EVT_COLOURPICKER_CHANGED, self.on_colour_foreground )
+		self.cp_foreground.Bind( wx.EVT_KILL_FOCUS, self.on_cp_background_killfocus )
+		self.cb_mode_theme.Bind( wx.EVT_COMBOBOX, self.on_select )
 		self.bt_apply.Bind( wx.EVT_BUTTON, self.on_apply )
 
 	def __del__( self ):
@@ -144,9 +158,18 @@ class TSRCFG ( wx.Panel ):
 
 
 	# Virtual event handlers, overide them in your derived class
+	def on_colour_background( self, event ):
+		event.Skip()
+
 	def on_cp_background_killfocus( self, event ):
 		event.Skip()
 
+	def on_colour_foreground( self, event ):
+		event.Skip()
+
+
+	def on_select( self, event ):
+		event.Skip()
 
 	def on_apply( self, event ):
 		event.Skip()

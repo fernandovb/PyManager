@@ -9,6 +9,7 @@ from _view.sys.sulog import SULOG
 from _view.sys.mn02 import MN02
 from _view.sys.srusr import SRUSR
 from _view.sys.srcfg import SRCFG
+from _control.sys.csrcfg import darkMode
 import _model.sys.global_conn as gconn
 
 
@@ -16,6 +17,9 @@ class MN01(TMN01):
 
     def __init__(self, *args, **kwargs):
         super(MN01, self).__init__(*args, **kwargs)
+        self.defaultColour = self.GetBackgroundColour()
+        darkMode(self, self.defaultColour)
+
         # Cria Barra de Status
         self.StbMenu = self.CreateStatusBar(4, wx.STB_DEFAULT_STYLE, wx.ID_ANY)
         self.StbMenu.SetStatusWidths([400, 300, 300, 300])
@@ -51,12 +55,14 @@ class MN01(TMN01):
                         self.sb_transaction.ShowNewPage(self.panel)
                         self.sb_transaction.SetSelection(1)
                 except:
-                    self.StbMenu.SetStatusText(f'Transação "{t}" não localizada.')
-                    self.mn_timer.Start(5000) # Ativa o timer para limpar a mensagem
+                    self.StbMenu.SetStatusText(
+                        f'Transação "{t}" não localizada.')
+                    # Ativa o timer para limpar a mensagem
+                    self.mn_timer.Start(5000)
             else:
                 self.StbMenu.SetStatusText('Já existe uma seção em andamento')
                 self.mn_timer.Start(5000)
-    
+
     def ac_config(self, event):
         pass
 
@@ -69,18 +75,19 @@ class MN01(TMN01):
             except:
                 pass
         else:
-            dlg = wx.MessageDialog(self, "Deseja encerrar o sistema?", "Fechar sistema", style=wx.YES_NO)
+            dlg = wx.MessageDialog(
+                self, "Deseja encerrar o sistema?", "Fechar sistema", style=wx.YES_NO)
             result = dlg.ShowModal()
             dlg.Destroy()
             if result == wx.ID_YES:
                 gconn.conn.close_connection()
                 wx.Exit()
-    
+
     def on_keydown(self, event):
         keycode = event.GetKeyCode()
-        if keycode == 13: # Verifica se a tecla <Enter> foi pressionada
+        if keycode == 13:  # Verifica se a tecla <Enter> foi pressionada
             self.ac_chama_transacao(transacao=self.tc_executar.Value)
-        elif keycode == 27: # Verifica se a tecla <ESC> foi pressionada
+        elif keycode == 27:  # Verifica se a tecla <ESC> foi pressionada
             self.tc_executar.Value = ''
         event.Skip()
 
@@ -92,13 +99,13 @@ class MN01(TMN01):
 
     def on_cancel(self, event):
         self.panel.on_cancel()
-    
+
     def on_find(self, event):
         self.panel.on_find()
 
     def on_timer(self, event):
         self.StbMenu.SetStatusText('')
-    
+
     def on_insert(self, event):
         self.panel.on_insert()
 
@@ -134,7 +141,7 @@ class MN01(TMN01):
     def transaction(self, message, arg2=None):
         if message in self.list_transaction:
             self.ac_chama_transacao(transacao=message)
-        
+
     def botton_off(self, message, arg2=None):
         if message == 0:
             # Desabilita botões - Menu em Exibição
